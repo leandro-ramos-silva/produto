@@ -1,0 +1,47 @@
+{
+  "id": 1,
+  "nome_produto": "BB Seguro Vida",
+  "parcelas": 12,
+  "planos": [
+    {
+      "assistencias": [
+        {
+          "tipo0": "Assistência Funeral"
+        }
+      ],
+      "Coberturas": [
+        {
+          "tipo0": "Morte Natural ou Acidental"
+        }
+      ],
+      "id_plano": 1,
+      "nome_plano": "Plano Básico",
+      "valor": 9.74
+    },
+    {
+      "assistencias": [
+        {
+          "tipo0": "Assistência Funeral"
+        },
+        {
+          "tipo1": "Assistência de Farmácia em Casa"
+        },
+        {
+          "tipo2": "Assistência de Chaveiro Residencial"
+        }
+      ],
+      "Coberturas": [
+        {
+          "tipo0": "Morte Natural ou Acidental"
+        },
+        {
+          "tipo1": "Indenização Extra de R$ 1.500,00"
+        }
+      ],
+      "id_plano": 2,
+      "nome_plano": "Plano Total",
+      "valor": 12.59
+    }
+  ],
+  "ramo": "Vida"
+}

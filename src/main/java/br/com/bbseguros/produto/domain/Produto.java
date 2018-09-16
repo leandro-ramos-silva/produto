@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "produto")
 public class Produto implements Serializable {
@@ -25,6 +27,8 @@ public class Produto implements Serializable {
 	
 	private String nome ;
 	private Integer parcelas ;
+	
+	
 	
 	@ManyToMany
 	@JoinTable(name="produto_plano", 

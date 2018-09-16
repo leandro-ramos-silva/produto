@@ -42,6 +42,7 @@ public class ProdutoResource {
 			@ApiResponse(code = 404, message = "Codigo inexistente") })
 	public ResponseEntity<Produto> findById( @RequestBody Produto produto){
 		return ResponseEntity.ok().body(service.findById(produto.getId())) ;
+		//return ResponseEntity.ok().body(new Produto()) ;
 	}
 	
 	

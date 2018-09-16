@@ -14,6 +14,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name = "plano")
@@ -24,6 +27,7 @@ public class Plano implements Serializable {
 	@Id	
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private Integer id ;
+	
 	
 	@ManyToMany
 	@JoinTable(name="plano_cobertura", 
@@ -39,7 +43,7 @@ public class Plano implements Serializable {
 	inverseJoinColumns = @JoinColumn(name = "assistencia_id") 	)
 	private List<Assistencia> assistencias  = new ArrayList<>(); ;
 	
-	
+	@JsonIgnore
 	@ManyToMany(mappedBy="planos")	
 	private List<Produto> produtos = new ArrayList<>();
 	

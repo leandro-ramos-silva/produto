@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "cobertura")
 public class Cobertura implements Serializable {
@@ -31,7 +33,7 @@ public class Cobertura implements Serializable {
 	
 	@Temporal(TemporalType.DATE)
 	private Date dataAltercao;
-	
+	@JsonIgnore
 	@ManyToMany(mappedBy="coberturas")
 	private List<Plano> planos  = new ArrayList<>() ;
 	

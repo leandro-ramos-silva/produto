@@ -62,22 +62,34 @@ public class Instantiation implements CommandLineRunner  {
 		Assistencia assistencia3  = new Assistencia(null,"ASSISTÊNCIA BB SEGURO VIDA MULHER") ;
 		Assistencia assistencia4  = new Assistencia(null,"ASSISTÊNCIA BB SEGURO VIDA") ;
 		Assistencia assistencia5  = new Assistencia(null,"SOS TOTAL - OURO RESIDENCIAL") ;
-		
+		assistenciaRepo.saveAll(Arrays.asList(assistencia1,assistencia2,assistencia3,
+				assistencia4,assistencia5));
 		
 		Cobertura cob1 = new Cobertura(null,"COBERTURA GENERICA PARA SINISTRO") ;
 		Cobertura cob2 = new Cobertura(null,"INDENIZAÇAO ESPECIAL POR ACIDENTE - IEA") ;
 		Cobertura cob3 = new Cobertura(null,"INVALIDEZ PERMANENTE TOTAL OU PARCIAL POR ACIDENTE - IPA") ;
 		
+		coberturaRepo.saveAll(Arrays.asList(cob1,cob2,cob3));
 		Plano plano1 = new Plano(null, "completo", 15.00) ;
 		Plano plano2 = new Plano(null, "basico", 9.00) ;
+		
+		plano1.getAssistencias().addAll(Arrays.asList(assistencia1,assistencia5)) ;
+		plano2.getAssistencias().addAll(Arrays.asList(assistencia1,assistencia2,
+				assistencia3,assistencia4,assistencia5)) ;
+		
 		
 		plano1.getCoberturas().addAll(Arrays.asList(cob1,cob2,cob3)) ;		
 		plano2.getCoberturas().addAll(Arrays.asList(cob1)) ;
 		
 		
-		List<Cobertura> listCob = Arrays.asList(new Cobertura(10, null)) ;
+		planoRepo.saveAll(Arrays.asList(plano1,plano2));
 		
-		List<Assistencia> listAssis = Arrays.asList(new Assistencia(255, null)) ;
+		
+		Produto prod1 = new Produto(null,"vidinha",12,"vida") ;
+		
+		prod1.getPlano().addAll(Arrays.asList(plano1,plano2)) ;
+		
+		produtoRepo.saveAll(Arrays.asList(prod1));
 		
 	
 		//Plano plano1 = new Plano(null, listCob, listAssis, "basico", 9.90) ;

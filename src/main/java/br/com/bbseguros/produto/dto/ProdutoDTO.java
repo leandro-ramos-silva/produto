@@ -45,12 +45,12 @@ public class ProdutoDTO implements Serializable {
 	
 	
 	
-	public ProdutoDTO(Integer id, String nome_produto, Integer parcelas, List<PlanoDTO> planos, String ramo) {
+	public ProdutoDTO(Integer id, String nome_produto, Integer parcelas, String ramo) {
 		super();
 		this.id = id;
 		this.nome_produto = nome_produto;
 		this.parcelas = parcelas;
-		this.planos = planos;
+		
 		this.ramo = ramo;
 	}
 	public Integer getId() {

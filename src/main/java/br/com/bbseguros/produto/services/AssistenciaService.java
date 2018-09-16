@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.bbseguros.produto.domain.Assistencia;
 import br.com.bbseguros.produto.repositories.AssistenciaRepository;
-import br.com.bbseguros.produto.services.exception.ObjectNotFoundExecption;
+import br.com.bbseguros.produto.resources.exception.*;
 
 @Service
 public class AssistenciaService {
@@ -20,7 +21,7 @@ public class AssistenciaService {
 		
 		 Optional<Assistencia>  obj =  repo.findById(id) ;
 		 
-		 return obj.orElseThrow(() -> new ObjectNotFoundExecption("Nenhuma assistencia encontrada") ) ;
+		 return obj.orElseThrow(() -> new ObjectNotFoundException("Nenhuma assistencia encontrada") ) ;
 					 
 			
 		}
@@ -35,6 +36,17 @@ public class AssistenciaService {
 		return repo.save(assistencia) ;
 	}
 	
-	
+public void delete(Integer id ) {
+		
+		findById(id) ;
+		try {
+			repo.deleteById(id);
+		}catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Nao é possivel a exclusao de uma assistencia com planos") ;
+		}
+	}
+
+
+
 
 }

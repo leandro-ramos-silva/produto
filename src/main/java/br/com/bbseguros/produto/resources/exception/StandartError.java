@@ -1,8 +1,8 @@
-package br.com.bbseguros.produto.services.exception;
+package br.com.bbseguros.produto.resources.exception;
 
 import java.io.Serializable;
-import java.security.Timestamp;
-import java.sql.Time;
+
+import java.util.Date;
 
 public class StandartError implements Serializable {
 
@@ -11,7 +11,7 @@ public class StandartError implements Serializable {
 	
 	private Integer status ;
 	private String msg ;
-	private Timestamp timeStamp ;
+	private Date  timeStamp ;
 	public Integer getStatus() {
 		return status;
 	}
@@ -24,17 +24,18 @@ public class StandartError implements Serializable {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	public Timestamp getTimeStamp() {
-		return timeStamp;
-	}
-	public void setTimeStamp(Timestamp timeStamp) {
-		this.timeStamp = timeStamp;
-	}
-	public StandartError(Integer status, String msg, Timestamp timeStamp) {
+
+	public StandartError(Integer status, String msg, Date data ){
 		super();
 		this.status = status;
 		this.msg = msg;
-		this.timeStamp = timeStamp ;
+		this.timeStamp = data ;
+	}
+	public Date getTimeStamp() {
+		return timeStamp;
+	}
+	public void setTimeStamp(Date timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 	
 	

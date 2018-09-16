@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,25 +39,39 @@ public class AssistenciaResource {
 	}
 
 
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.GET)
 	@ApiOperation(value="Retorna assistencia pelo  pelo ID")
 	@ApiResponses(value = {		
 			@ApiResponse(code = 404, message = "Codigo inexistente") })
-	public ResponseEntity<Assistencia> findById( @RequestBody Assistencia assistencia){
-		return ResponseEntity.ok().body(service.findById(assistencia.getId())) ;
+	public ResponseEntity<Assistencia> findById( @PathVariable Integer id ){
+		return ResponseEntity.ok().body(service.findById(id)) ;
 	}
 	
 	
-	@RequestMapping(method=RequestMethod.PUT)
-	@ApiOperation(value="Retorna Assistencia pelo  pelo ID")
+	
+	
+	@RequestMapping(method=RequestMethod.POST)
+	@ApiOperation(value="atualiza assistencia pelo  pelo ID")
 	@ApiResponses(value = {		
 			@ApiResponse(code = 404, message = "Codigo inexistente") })	
-	public ResponseEntity<Assistencia> addProduto(
+	public ResponseEntity<Assistencia> insert(
 			@RequestBody Assistencia assistencia) {
 		return ResponseEntity.ok().body(service.save(assistencia) );
 		
 		
 	}
+	
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
+	@ApiOperation(value="Deleta cobertura pelo  pelo ID")
+	@ApiResponses(value = {		
+			@ApiResponse(code = 404, message = "Codigo inexistente") })
+	public ResponseEntity<Void>  delete( @PathVariable Integer id){
+		service.delete(id);
+		return ResponseEntity.noContent().build() ;
+		
+	}
+	
 	
 
 }

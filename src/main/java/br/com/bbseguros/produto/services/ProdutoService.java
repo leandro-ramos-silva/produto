@@ -13,8 +13,8 @@ import br.com.bbseguros.produto.dto.PlanoDTO;
 import br.com.bbseguros.produto.dto.ProdutoDTO;
 import br.com.bbseguros.produto.repositories.PlanoRepository;
 import br.com.bbseguros.produto.repositories.ProdutoRepository;
-import br.com.bbseguros.produto.services.exception.ObjectNotFoundExecption;
-import br.com.bbseguros.produto.services.exception.ObjectValidationExecption;
+
+import br.com.bbseguros.produto.resources.exception.*;
 
 @Service
 public class ProdutoService {
@@ -29,30 +29,37 @@ public class ProdutoService {
 		
 	 Optional<Produto>  obj =  repo.findById(id) ;
 	 
-	 return obj.orElseThrow(() -> new ObjectNotFoundExecption("Nenhuma Produto encontrado") ) ;		
+	 return obj.orElseThrow(() -> new ObjectNotFoundException("Nenhuma Produto encontrado") ) ;		
 	 
 		
+	}
+	
+	public void delete(Integer id) {
+		findById(id) ;
+		repo.deleteById(id) ;
+		 
+			
 	}
 
 	public Produto save(Produto produto) {
 		
 		if(produto.getPlano() != null) {
 			if(produto.getPlano().size()  < 1 ) {			
-				throw new ObjectValidationExecption("Deve ser selecionada pelo menos 1 plano") ;					
+				throw new ObjectValidationException("Deve ser selecionada pelo menos 1 plano") ;					
 		}else {
 			//valida se cobertura existe
 			List<Plano> planoList  = produto.getPlano() ;
 			for (Plano plano : planoList) {
 				if(!(planoRepo.existsById(plano.getId()))) {
 					System.out.println("### ID pesquisado " + plano.getId()) ;
-					throw new ObjectValidationExecption("O plano id " + plano.getId() + "  nao existe ") ;
+					throw new ObjectValidationException("O plano id " + plano.getId() + "  nao existe ") ;
 				} 
 			}
 			
 			
 		}
 		}else {
-			throw new ObjectValidationExecption("Deve ser selecionada pelo menos 1 Plano") ;
+			throw new ObjectValidationException("Deve ser selecionada pelo menos 1 Plano") ;
 		}
 		
 		

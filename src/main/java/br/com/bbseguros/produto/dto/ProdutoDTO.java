@@ -4,17 +4,37 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import br.com.bbseguros.produto.domain.Produto;
 
 public class ProdutoDTO implements Serializable {
 		
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;	
 	
 	private Integer id ;
+	
+	
+	@NotEmpty(message="Insira um nome")
+	@Length(min=3, max=80, message="O nome deve ter entre 3 a 80 caracteres")
 	private String nome_produto ;
+	
+	
+	
+	@Override
+	public String toString() {
+		return "ProdutoDTO [id=" + id + ", nome_produto=" + nome_produto + ", parcelas=" + parcelas + ", planos="
+				+ planos + ", ramo=" + ramo + "]";
+	}
 	private Integer parcelas ;
+	
+	@NotEmpty(message="Insira a quantidade pelo menos 1 plano valido")
 	private List<PlanoDTO> planos  ;
+	
+	@NotEmpty(message="Insira um nome")
+	@Length(min=3, max=10, message="O ramo deve ter entre 3 a 10 caracteres")
 	private String ramo ;
 	public String getNome_produto() {
 		return nome_produto;

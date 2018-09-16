@@ -3,7 +3,7 @@ package br.com.bbseguros.produto.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import br.com.bbseguros.produto.dto.PlanoDTO;
+
 
 @Entity
 @Table(name = "plano")
@@ -29,6 +31,11 @@ public class Plano implements Serializable {
 	private Integer id ;
 	
 	
+	@Override
+	public String toString() {
+		return "Plano [id=" + id + ", coberturas=" + coberturas + ", assistencias=" + assistencias + ", produtos="
+				+ produtos + ", nome=" + nome + ", valor=" + valor + "]";
+	}
 	@ManyToMany
 	@JoinTable(name="plano_cobertura", 
 	joinColumns = @JoinColumn(name="plano_id"), 
@@ -98,6 +105,20 @@ public class Plano implements Serializable {
 	}
 	public Plano(){
 		
+		
+	}
+	
+	public Plano(PlanoDTO planoDTO) {
+		
+		
+	   
+		//prod.getPlanos().stream().map(x -> new Plano(x)).collect(Collectors.toList()) ;
+		this.id =  planoDTO.getId_plano() ;
+		this.nome = planoDTO.getNome_plano() ;
+		this.valor = planoDTO.getValor() ;
+			
+		setCoberturas(planoDTO.getCoberturas().stream().map(x -> new Cobertura(x)).collect(Collectors.toList())) ;
+		setAssistencias(planoDTO.getAssistencias().stream().map(x -> new Assistencia(x)).collect(Collectors.toList()));
 		
 	}
 	@Override

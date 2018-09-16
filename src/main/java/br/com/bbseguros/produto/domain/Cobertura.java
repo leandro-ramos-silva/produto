@@ -17,6 +17,8 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.bbseguros.produto.dto.CoberturaDTO;
+
 @Entity
 @Table(name = "cobertura")
 public class Cobertura implements Serializable {
@@ -37,6 +39,11 @@ public class Cobertura implements Serializable {
 	@ManyToMany(mappedBy="coberturas")
 	private List<Plano> planos  = new ArrayList<>() ;
 	
+	
+	public Cobertura(CoberturaDTO cob) {
+		this.id = cob.getId() ;
+		this.descricao = cob.getDescricao() ;
+	}
 	
 	public List<Plano> getPlanos() {
 		return planos;

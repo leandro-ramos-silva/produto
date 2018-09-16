@@ -12,8 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import br.com.bbseguros.produto.dto.ProdutoDTO;
 
 @Entity
 @Table(name = "produto")
@@ -25,7 +30,17 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id ;
 	
+	
 	private String nome ;
+	
+
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", nome=" + nome + ", parcelas=" + parcelas + ", planos=" + getPlano().toString()
+				+ ", ramoEmissao=" + ramoEmissao + "]";
+	}
+
+
 	private Integer parcelas ;
 	
 	

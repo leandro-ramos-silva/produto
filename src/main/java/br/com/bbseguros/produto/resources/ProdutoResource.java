@@ -3,6 +3,8 @@ package br.com.bbseguros.produto.resources;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,9 +52,12 @@ public class ProdutoResource {
 	@ApiOperation(value="Retorna produto pelo  pelo ID")
 	@ApiResponses(value = {		
 			@ApiResponse(code = 404, message = "Codigo inexistente") })	
-	public ResponseEntity<Produto> addProduto(
-			@RequestBody Produto produto) {
-		return ResponseEntity.ok().body(service.save(produto) );
+	public ResponseEntity<Produto> addProduto(@Valid
+			@RequestBody ProdutoDTO produto) {
+		
+		System.out.println("###############" +produto.toString()) ;
+		Produto prod = service.fromDTO(produto);
+		return ResponseEntity.ok().body(service.save(prod) );
 		
 		
 	}

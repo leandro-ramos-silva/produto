@@ -33,10 +33,10 @@ public class CoberturaDTO implements Serializable {
 	public CoberturaDTO(Cobertura cobertura) {
 		
 		this.descricao = cobertura.getDescricao();
-		this.id = cobertura.getId() ;
-		
+		this.id = cobertura.getId() ;		
 		
 	}
+	
 	
 	
 

@@ -2,12 +2,15 @@ package br.com.bbseguros.produto.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.bbseguros.produto.domain.Plano;
 import br.com.bbseguros.produto.domain.Produto;
+import br.com.bbseguros.produto.dto.PlanoDTO;
+import br.com.bbseguros.produto.dto.ProdutoDTO;
 import br.com.bbseguros.produto.repositories.PlanoRepository;
 import br.com.bbseguros.produto.repositories.ProdutoRepository;
 import br.com.bbseguros.produto.services.exception.ObjectNotFoundExecption;
@@ -62,7 +65,12 @@ public class ProdutoService {
 		return repo.findAll() ;
 	}
 	
-	
-	
+	public Produto  fromDTO(ProdutoDTO prod) {
 
+	Produto produto = new Produto (prod.getId(),prod.getNome_produto(),prod.getParcelas(),prod.getRamo());
+	
+	produto.setPlano(prod.getPlanos().stream().map(x -> new Plano(x)).collect(Collectors.toList()) ) ;
+	System.out.println("#####produto " + produto.toString()) ;
+	return produto;
+	}
 }

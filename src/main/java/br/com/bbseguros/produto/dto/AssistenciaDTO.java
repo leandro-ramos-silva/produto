@@ -6,7 +6,10 @@ import br.com.bbseguros.produto.domain.Assistencia;
 
 public class AssistenciaDTO {
 	
+	
+	
 	private Integer id;
+	
 	private String descricao;
 	
 	
@@ -39,6 +42,7 @@ public class AssistenciaDTO {
 		this.descricao  = assistencia.getDescricao()  ;
 	
 	}
-
+	
+	
 
 }

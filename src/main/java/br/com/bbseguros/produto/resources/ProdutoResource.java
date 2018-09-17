@@ -47,8 +47,10 @@ public class ProdutoResource {
 	@ApiOperation(value="Retorna produto pelo  pelo ID")
 	@ApiResponses(value = {		
 			@ApiResponse(code = 404, message = "Codigo inexistente") })
-	public ResponseEntity<Produto> find( @PathVariable Integer id){
-		return ResponseEntity.ok().body(service.findById(id)) ;
+	public ResponseEntity<ProdutoDTO> find( @PathVariable Integer id){
+		ProdutoDTO prodDTO = new ProdutoDTO( service.findById(id)) ;
+		
+		return ResponseEntity.ok().body(prodDTO) ;
 		
 	}
 	
@@ -65,13 +67,12 @@ public class ProdutoResource {
 	
 	
 	@RequestMapping(method=RequestMethod.POST)
-	@ApiOperation(value="Retorna produto pelo  pelo ID")
+	@ApiOperation(value="Insere novo produto")
 	@ApiResponses(value = {		
 			@ApiResponse(code = 404, message = "Codigo inexistente") })	
 	public ResponseEntity<Produto> insert(@Valid
-			@RequestBody ProdutoDTO produto) {
+			@RequestBody ProdutoDTO produto) {	
 		
-		System.out.println("###############" +produto.toString()) ;
 		Produto prod = service.fromDTO(produto);
 		return ResponseEntity.ok().body(service.save(prod) );
 		
@@ -79,13 +80,13 @@ public class ProdutoResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT)
-	@ApiOperation(value="Retorna produto pelo  pelo ID")
+	@ApiOperation(value="Atualiza produto")
 	@ApiResponses(value = {		
 			@ApiResponse(code = 404, message = "Codigo inexistente") })	
 	public ResponseEntity<Produto> addProduto(@Valid
 			@RequestBody ProdutoDTO produto) {
 		
-		System.out.println("###############" +produto.toString()) ;
+		
 		Produto prod = service.fromDTO(produto);
 		return ResponseEntity.ok().body(service.save(prod) );
 		

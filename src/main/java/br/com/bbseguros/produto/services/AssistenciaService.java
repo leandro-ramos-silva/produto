@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.bbseguros.produto.domain.Assistencia;
+import br.com.bbseguros.produto.dto.AssistenciaDTO;
 import br.com.bbseguros.produto.repositories.AssistenciaRepository;
 import br.com.bbseguros.produto.resources.exception.*;
 
@@ -31,9 +32,11 @@ public class AssistenciaService {
 		return repo.findAll() ;
 	}
 	
-	public Assistencia save(Assistencia assistencia) {
+	
+	
+	public Assistencia save(AssistenciaDTO assistencia) {
 		
-		return repo.save(assistencia) ;
+		return repo.save(new Assistencia(assistencia)) ;
 	}
 	
 public void delete(Integer id ) {
@@ -46,7 +49,10 @@ public void delete(Integer id ) {
 		}
 	}
 
-
+public Assistencia fromDTO(AssistenciaDTO assist) {
+	
+	return new Assistencia(assist) ;
+}
 
 
 }

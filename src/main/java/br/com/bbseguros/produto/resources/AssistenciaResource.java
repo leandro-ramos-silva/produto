@@ -51,17 +51,27 @@ public class AssistenciaResource {
 	
 	
 	@RequestMapping(method=RequestMethod.POST)
-	@ApiOperation(value="atualiza assistencia pelo  pelo ID")
+	@ApiOperation(value="insere assistencia")
 	@ApiResponses(value = {		
 			@ApiResponse(code = 404, message = "Codigo inexistente") })	
 	public ResponseEntity<Assistencia> insert(
-			@RequestBody Assistencia assistencia) {
+			@RequestBody AssistenciaDTO assistencia) {
 		return ResponseEntity.ok().body(service.save(assistencia) );
 		
 		
 	}
 	
-	
+	@RequestMapping(method=RequestMethod.POST)
+	@ApiOperation(value="atualiza assistencia pelo  pelo ID")
+	@ApiResponses(value = {		
+			@ApiResponse(code = 404, message = "Codigo inexistente") })	
+	public ResponseEntity<AssistenciaDTO> update(
+			@RequestBody AssistenciaDTO assistencia) {
+		return ResponseEntity.ok().body(new AssistenciaDTO(service.save(assistencia) ));
+		
+		
+	}
+	 
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	@ApiOperation(value="Deleta cobertura pelo  pelo ID")
 	@ApiResponses(value = {		

@@ -38,6 +38,16 @@ public class PlanoResource {
 	}	
 	
 	
+	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
+	@ApiOperation(value="Retorna plano pelo  pelo ID")
+	@ApiResponses(value = {		
+			@ApiResponse(code = 404, message = "Codigo inexistente") })
+	public ResponseEntity<PlanoDTO>  find( @PathVariable Integer id){
+		
+		return ResponseEntity.ok().body(new PlanoDTO(service.findById(id))) ;
+		
+	}
+	
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	@ApiOperation(value="Deleta plano pelo  pelo ID")
